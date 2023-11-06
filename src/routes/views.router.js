@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { productsManager } from "../dao/managers/productsManager.js";
+import { cartsManager } from "../dao/managers/cartsManager.js";
 
 const router = Router();
 
@@ -30,7 +31,7 @@ router.get('/chat', (req, res) => {
     const productId = req.params.id;
   
     try {
-      const product = await productsManager.findProductById(productId);
+      const product = await productsManager.findById(productId);
   
       res.render('product-details', { product });
     } catch (error) {
@@ -43,8 +44,8 @@ router.get('/chat', (req, res) => {
   
     try {
       const cart = await cartsManager.findCartById(cartId);
-      // Obtén la lista de productos del carrito
-      const productsInCart = cart.products; // Asume que esta propiedad contiene los productos
+   
+      const productsInCart = cart.products; 
   
       res.render('cart-details', { products: productsInCart });
     } catch (error) {
